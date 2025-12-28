@@ -1,1 +1,19 @@
+{
+  "greeting": {
+    "keywords": ["hi", "hello", "hey"],
+    "response": "Hello! How can I help you today?"
+  },
+  "goodbye": {
+    "keywords": ["bye", "exit", "quit"],
+    "response": "Goodbye! Have a great day."
+  },
+  "thanks": {
+    "keywords": ["thanks", "thank you"],
+    "response": "You're welcome!"
+  },
+  "help": {
+    "keywords": ["help", "support"],
+    "response": "Sure! Please tell me your issue."
+  }
+}
 
