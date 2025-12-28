@@ -1,5 +1,13 @@
 import json
 import string
+import nltk
+from nltk.stem import WordNetLemmatizer
+
+
+nltk.download("wordnet")
+nltk.download("omw-1.4")
+
+lemmatizer = WordNetLemmatizer()
 
 # Load intents
 with open("data/intents.json", "r") as f:
@@ -7,15 +15,19 @@ with open("data/intents.json", "r") as f:
 
 def preprocess_text(text):
     """
-    Convert text to lowercase and remove punctuation
+    Lowercase, remove punctuation, tokenize, and lemmatize
     """
     text = text.lower()
     text = text.translate(str.maketrans("", "", string.punctuation))
-    return text.split()
+    tokens = text.split()
+
+
+    lemmatized_tokens = [lemmatizer.lemmatize(word) for word in tokens]
+    return lemmatized_tokens
 
 def get_intent(tokens):
     """
-    Match user tokens with intent keywords
+    Rule-based intent classification using lemmatized tokens
     """
     for intent, data in intents.items():
         for keyword in data["keywords"]:
@@ -25,7 +37,7 @@ def get_intent(tokens):
 
 def chatbot():
     print("Chatbot started (type 'bye' to exit)")
-    
+
     while True:
         user_input = input("You: ")
         tokens = preprocess_text(user_input)
@@ -41,4 +53,3 @@ def chatbot():
 
 if __name__ == "__main__":
     chatbot()
-
